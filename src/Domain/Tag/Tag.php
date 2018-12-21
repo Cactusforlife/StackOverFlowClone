@@ -14,7 +14,7 @@ namespace App\Domain\Tag;
  *
  * @package App\Domain\Tag
  */
-final class Tag
+class Tag
 {
     private $tagId;
 

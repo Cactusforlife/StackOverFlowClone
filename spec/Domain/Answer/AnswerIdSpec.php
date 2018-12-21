@@ -1,24 +1,24 @@
 <?php
 
-namespace spec\App\Domain\Tag;
+namespace spec\App\Domain\Answer;
 
 use App\Domain\Comparable;
 use App\Domain\Stringable;
-use App\Domain\Tag\TagId;
+use App\Domain\Answer\AnswerId;
 use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\ObjectBehavior;
 use Ramsey\Uuid\Uuid;
 
 /**
- * TagIdSpec
+ * AnswerIdSpec
  *
- * @package spec\App\Domain\Tag
+ * @package spec\App\Domain\Answer
  */
-class TagIdSpec extends ObjectBehavior
+class AnswerIdSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(TagId::class);
+        $this->shouldHaveType(AnswerId::class);
     }
 
     /**
@@ -51,7 +51,7 @@ class TagIdSpec extends ObjectBehavior
      */
     function it_can_be_compared_to_other_object()
     {
-        $other = new TagId($this->__toString()->getWrappedObject());
+        $other = new AnswerId($this->__toString()->getWrappedObject());
         $this->shouldBeAnInstanceOf(Comparable::class);
         $this->equalsTo($other)->shouldBe(true);
     }
@@ -63,8 +63,7 @@ class TagIdSpec extends ObjectBehavior
     {
         $uuidTxt = Uuid::uuid4()->toString();
         $this->beConstructedWith($uuidTxt);
-        $this->shouldHaveType(TagId::class);
+        $this->shouldHaveType(AnswerId::class);
         $this->jsonSerialize()->shouldBe($uuidTxt);
     }
 }
-
