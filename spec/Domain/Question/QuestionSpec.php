@@ -6,6 +6,7 @@ use App\Domain\Answer\Answer;
 use App\Domain\Question\Question;
 use App\Domain\Tag\Tag;
 use App\Domain\UserManagement\User;
+use DateTimeImmutable;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -27,7 +28,7 @@ class QuestionSpec extends ObjectBehavior
         $this->body = 'this is another body';
         $answers=[$answer->getWrappedObject()];
         $tags=[$tag->getWrappedObject()];
-        $this->date = new \DateTimeImmutable('2000-01-01');
+        $this->date = new DateTimeImmutable('2000-01-01');
         $this->beConstructedWith($this->title,$this->body,$tags,$user->getWrappedObject());
     }
 
@@ -41,6 +42,10 @@ class QuestionSpec extends ObjectBehavior
         $this->addTag($tag)->shouldBeArray();
     }
 
+    function it_has_a_date()
+    {
+        $this->getDate()->shouldBeAnInstanceOf(DateTimeImmutable::class);
+    }
 
     function it_can_add_tags(Tag $tag)
     {
@@ -87,12 +92,20 @@ class QuestionSpec extends ObjectBehavior
       $this->correctAnswer()->shouldBe(false);
     }
 
+    function it_can_be_converted_to_json()
+    {
+        $this->shouldBeAnInstanceOf(\JsonSerializable::class);
+        $this->jsonSerialize()->shouldBe([
 
-
-
-
-
-
+            'questionId' => $this->getQuestionId(),
+            'user' => $this->getUser(),
+            'title' => $this->title,
+            'body' => $this->body,
+            'tags' => $this->getTags(),
+            'datePublished' => $this->getDate(),
+            'answersGiven' => $this->getAnswers(),
+        ]);
+    }
 
 
 }

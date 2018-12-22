@@ -9,6 +9,7 @@ use PhpSpec\ObjectBehavior;
 
 class VoteSpec extends ObjectBehavior
 {
+    private $value;
 
     /**
      * @throws \Exception
@@ -18,10 +19,12 @@ class VoteSpec extends ObjectBehavior
         $this->beConstructedThrough('positive');
     }
 
+
     function it_is_initializable()
     {
         $this->shouldHaveType(Vote::class);
     }
+
 
     function it_can_create_a_negative_vote()
     {
@@ -39,6 +42,14 @@ class VoteSpec extends ObjectBehavior
         $this->beConstructedThrough('negative');
         $this->shouldHaveType(Vote::class);
         $this->isNegative()->shouldBe(false);
+    }
+
+    function it_can_be_converted_to_json()
+    {
+        $this->shouldBeAnInstanceOf(\JsonSerializable::class);
+        $this->jsonSerialize()->shouldBe([
+            'value' => true,
+        ]);
     }
 
 

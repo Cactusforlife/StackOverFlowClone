@@ -30,6 +30,14 @@ class TagSpec extends ObjectBehavior
     function it_has_a_Description()
     {
         $this->Description()->shouldBe($this->description);
+    }
 
+    function it_can_be_converted_to_json()
+    {
+        $this->shouldBeAnInstanceOf(\JsonSerializable::class);
+        $this->jsonSerialize()->shouldBe([
+            'tagId' => $this->TagId(),
+            'description' => $this->description,
+        ]);
     }
 }

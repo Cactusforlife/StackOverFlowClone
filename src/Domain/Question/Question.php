@@ -20,7 +20,7 @@ use DateTimeImmutable;
  *
  * @package App\Domain\Question
  */
- class Question
+ class Question implements \JsonSerializable
  {
      private $questionId;
 
@@ -159,6 +159,21 @@ use DateTimeImmutable;
          }
          return false;
      }
+
+     public function jsonSerialize()
+     {
+         return [
+
+             'questionId' => $this->questionId,
+             'user' => $this->user,
+             'title' => $this->title,
+             'body' => $this->body,
+             'tags' => $this->tags,
+             'datePublished' => $this->getDate(),
+             'answersGiven' => $this->answers,
+         ];
+     }
+
 
 
 
