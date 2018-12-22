@@ -19,7 +19,7 @@ use App\Domain\UserManagement\User;
  *
  * @package App\Domain\Answer
  */
-class Answer
+class Answer implements \JsonSerializable
 {
     private $answerId;
     private $body;
@@ -48,8 +48,8 @@ class Answer
         $this->user = $user;
         $this->votes = $votes = array();
         $this->date = new DateTimeImmutable('2000-01-01');
-        $this->positiveVote = true;
-        $this->negativeVote = false;
+        $this->positiveVote = 0;
+        $this->negativeVote = 0;
     }
 
     /**
@@ -109,16 +109,17 @@ class Answer
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function isPositiveVote(): bool
+    public function getPositiveVotes(): int
     {
         return $this->positiveVote;
     }
+
     /**
-     * @return bool
+     * @return int
      */
-    public function isNegativeVote(): bool
+    public function getNegativeVotes(): int
     {
         return $this->negativeVote;
     }
@@ -147,8 +148,24 @@ class Answer
     }
 
 
-
-
-
-
+    /**
+     * Specify data which should be serialized to JSON
+     * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    public function jsonSerialize()
+    {
+       return [
+            'answerId' => $this->getAnswerId(),
+            'question' => $this->question,
+            'user' => $this->user,
+            'body' => $this->body,
+            'datePublished' => $this->getDate(),
+            'correctAnswer' => $this->correctAnswer,
+            'positiveVotes' => $this->positiveVote,
+            'negativeVotes' => $this->negativeVote,
+        ];
+    }
 }

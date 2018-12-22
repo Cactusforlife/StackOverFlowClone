@@ -31,7 +31,7 @@ class AnswerSpec extends ObjectBehavior
         $this->correctAnswer = false;
         $this->votes = $votes = [];
         $this->date = new DateTimeImmutable('2000-01-01');
-        $this->positiveVote = 1;
+        $this->positiveVote = 0;
         $this->negativeVote = 0;
         $this->beConstructedWith($this->body,$question->getWrappedObject(),$user->getWrappedObject());
 
@@ -64,14 +64,34 @@ class AnswerSpec extends ObjectBehavior
         $this->setAsCorrect()->shouldBe(true);
     }
 
-    function it_can_return_a_positive_vote()
+    function it_has_a_positive_vote()
     {
-        $this->ispositiveVote()->shouldBe(true);
+        $this->getPositiveVotes()->shouldBe($this->negativeVote);
+    }
+
+    function it_has_a_negative_vote()
+    {
+        $this->getNegativeVotes()->shouldBe($this->negativeVote);
     }
 
     function it_can_add_a_vote()
     {
         $this->addVote(vote::negative())->shouldBeAnInstanceOf(Vote::class);
         $this->addVote(vote::positive())->shouldBeAnInstanceOf(Vote::class);
+    }
+
+    function it_can_be_converted_to_json()
+    {
+        $this->shouldBeAnInstanceOf(\JsonSerializable::class);
+        $this->jsonSerialize()->shouldBe([
+            'answerId' => $this->getAnswerId(),
+            'question' => $this->getQuestion(),
+            'user' => $this->getUser(),
+            'body' => $this->body,
+            'datePublished' => $this->getDate(),
+            'correctAnswer' => $this->correctAnswer,
+            'positiveVotes' => $this->getPositiveVotes(),
+            'negativeVotes' => $this->getNegativeVotes(),
+        ]);
     }
 }
