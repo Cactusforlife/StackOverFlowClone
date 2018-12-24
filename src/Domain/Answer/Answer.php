@@ -135,6 +135,7 @@ class Answer implements \JsonSerializable
     }
 
     public function addVote($vote)
+
     {
         if($vote == true)
         {
@@ -143,7 +144,7 @@ class Answer implements \JsonSerializable
 
         if($vote == false)
         {
-            return $this->votes = $vote;
+           return $this->votes = $vote;
         }
     }
 

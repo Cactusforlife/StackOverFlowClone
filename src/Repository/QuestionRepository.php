@@ -10,8 +10,13 @@ namespace App\Repository;
 
 
 use App\Domain\Question\Question;
+use App\Domain\Question\QuestionId;
 
 interface QuestionRepository
 {
     public function add(Question $question);
+
+    public function remove(Question $question);
+
+    public function withQuestionId(QuestionId $questionId) : Question;
 }

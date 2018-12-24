@@ -10,8 +10,13 @@ namespace App\Repository;
 
 
 use App\Domain\Answer\Answer;
+use App\Domain\Answer\AnswerId;
 
 interface AnswerRepository
 {
     public function add(Answer $answer);
+
+    public function remove(Answer $answer);
+
+    public function withAnswerId(AnswerId $answerId): Answer;
 }
