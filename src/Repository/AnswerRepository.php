@@ -18,5 +18,7 @@ interface AnswerRepository
 
     public function remove(Answer $answer);
 
+    public function update(Answer $answer);
+
     public function withAnswerId(AnswerId $answerId): Answer;
 }

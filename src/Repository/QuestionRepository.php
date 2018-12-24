@@ -18,5 +18,9 @@ interface QuestionRepository
 
     public function remove(Question $question);
 
+    public function update(Question $question);
+
     public function withQuestionId(QuestionId $questionId) : Question;
+    
+
 }

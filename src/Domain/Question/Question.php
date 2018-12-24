@@ -135,6 +135,12 @@ use DateTimeImmutable;
          return $this->body = $body;
      }
 
+     public function update_title_and_body($title, $body)
+     {
+         $this->title = $title;
+         $this->body = $body;
+     }
+
      public function addAnswer(Answer $answer)
      {
          array_push($this->answers, $answer);
@@ -173,6 +179,8 @@ use DateTimeImmutable;
              'answersGiven' => $this->answers,
          ];
      }
+
+
 
 
 

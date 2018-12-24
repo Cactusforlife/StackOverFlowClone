@@ -67,6 +67,17 @@ class QuestionSpec extends ObjectBehavior
         $this->getBody()->shouldBe($this->body);
     }
 
+
+    function it_can_update_body_and_title()
+    {
+        $title = $this->title;
+        $body = $this->body;
+        $this->update_title_and_body($title,$body);
+        $this->getTitle()->shouldBe($this->title);
+        $this->getBody()->shouldBe($this->body);
+
+    }
+
     function it_can_add_an_answer(Answer $answer)
     {
         $this->addAnswer($answer)->shouldBeArray();
