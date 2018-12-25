@@ -21,4 +21,10 @@ interface AnswerRepository
     public function update(Answer $answer);
 
     public function withAnswerId(AnswerId $answerId): Answer;
+
+    public function setAsCorrect(Answer $answer);
+
+    public function voteUp(Answer $answer);
+
+    public function voteDown(Answer $answer);
 }
