@@ -16,8 +16,8 @@ namespace App\Domain\Tag;
  */
 class Tag implements \JsonSerializable
 {
-    private $tagId;
 
+    private $tagId;
     private $description;
 
     /**

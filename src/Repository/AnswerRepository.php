@@ -14,17 +14,17 @@ use App\Domain\Answer\AnswerId;
 
 interface AnswerRepository
 {
-    public function add(Answer $answer);
+    public function add(Answer $answer): Answer;
 
-    public function remove(Answer $answer);
+    public function remove(Answer $answer): Void;
 
-    public function update(Answer $answer);
+    public function update(Answer $answer): Answer;
 
     public function withAnswerId(AnswerId $answerId): Answer;
 
-    public function setAsCorrect(Answer $answer);
+    public function setAsCorrect(Answer $answer): Answer;
 
-    public function voteUp(Answer $answer);
+    public function voteUp(Answer $answer):Answer;
 
-    public function voteDown(Answer $answer);
+    public function voteDown(Answer $answer):Answer;
 }

@@ -22,18 +22,42 @@ use DateTimeImmutable;
  */
  class Question implements \JsonSerializable
  {
+     /**
+      * @var QuestionId
+      *
+      * @ORM\Id
+      * @ORM\GeneratedValue(strategy="NONE")
+      * @ORM\Column(type="QuestionId", name="id")
+      */
      private $questionId;
-
+     /**
+      * @var string
+      * @ORM\Column(type="string")
+      */
      private $title;
-
+     /**
+      * @var array
+      * @ORM\Column(type="Array")
+      */
      private $answers;
-
+     /**
+      * @var string
+      * @ORM\Column(type="string")
+      */
      private $body;
-
+     /**
+      * @var array
+      * @ORM\Column(type="Array")
+      */
      private $tags;
-
+     /**
+      * @ORM\ManyToOne(targetEntity="App\Domain\UserManagement\User")
+      */
      private $user;
-
+     /**
+      * @var DateTimeImmutable
+      * @ORM\Column(type="datetime_imutable")
+      */
      private $date;
 
 

@@ -15,20 +15,60 @@ use App\Domain\Question\Question;
 use App\Domain\UserManagement\User;
 
 /**
- * Answer
+ * Class Answer
  *
  * @package App\Domain\Answer
+ * @ORM\Entity
+ * @ORM\Table (name="Answer")
  */
 class Answer implements \JsonSerializable
 {
+    /**
+     * @var AnswerId
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="AnswerId", name="id")
+     */
     private $answerId;
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
     private $body;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Domain\Question\Question")
+     */
     private $question;
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
     private $correctAnswer;
+
+    /**
+     * @var DateTimeImmutable
+     * @ORM\Column(type="datetime_imutable")
+     */
     private $date;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Domain\UserManagement\User")
+     */
     private $user;
+    /**
+     * @var array
+     *
+     */
     private $votes;
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
     private $positiveVote;
+    /**
+     * @var int
+     * @ORM\Column(type="bool")
+     */
     private $negativeVote;
 
     /**
@@ -105,6 +145,7 @@ class Answer implements \JsonSerializable
      */
     public function getVotes(): array
     {
+
         return $this->votes;
     }
 
@@ -139,12 +180,12 @@ class Answer implements \JsonSerializable
     {
         if($vote == true)
         {
-           return $this->votes = $vote;
+           return $this->positiveVote + 1;
         }
 
         if($vote == false)
         {
-           return $this->votes = $vote;
+           return $this->negativeVote + 1;
         }
     }
 

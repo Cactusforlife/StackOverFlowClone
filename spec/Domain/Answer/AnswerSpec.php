@@ -54,9 +54,11 @@ class AnswerSpec extends ObjectBehavior
         $this->getBody()->shouldBe($this->body);
     }
 
-    function it_as_a_correct_answer()
+    function it_has_a_correct_answer()
     {
-       $this->isCorrectAnswer()->shouldBe($this->correctAnswer);
+        $answer = $this->setAsCorrect();
+        $answer->shouldReturn(true);
+        $this->isCorrectAnswer()->shouldBe($answer);
     }
 
     function it_can_set_an_answer_correct()
@@ -76,8 +78,11 @@ class AnswerSpec extends ObjectBehavior
 
     function it_can_add_a_vote()
     {
-        $this->addVote(vote::negative())->shouldBeAnInstanceOf(Vote::class);
-        $this->addVote(vote::positive())->shouldBeAnInstanceOf(Vote::class);
+        $positiveVotes = $this->getPositiveVotes();
+        $negativeVotes = $this->getNegativeVotes();
+
+        $this->addVote(vote::negative())->shouldBe($positiveVotes->getWrappedObject()+1);
+        $this->addVote(vote::positive())->shouldBe($negativeVotes->getWrappedObject()+1);
     }
 
     function it_can_be_converted_to_json()

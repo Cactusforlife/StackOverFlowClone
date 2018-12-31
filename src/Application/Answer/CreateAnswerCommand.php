@@ -24,7 +24,7 @@ class CreateAnswerCommand
      * @param $body
      * @param $user
      */
-    public function __construct(String $body, Question $question, User $user)
+     public function __construct(String $body, Question $question, User $user)
     {
         $this->question = $question;
         $this->body = $body;
